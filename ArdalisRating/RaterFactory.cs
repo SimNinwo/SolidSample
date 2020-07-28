@@ -4,7 +4,7 @@ namespace ArdalisRating
 {
     public class RaterFactory
     {
-        public Rater Create(Policy policy, RatingEngine engine)
+        public Rater Create(Policy policy, IRatingContext context)
         {
             try
             {
@@ -12,11 +12,11 @@ namespace ArdalisRating
 
                 return (Rater)Activator.CreateInstance(
                     Type.GetType($"ArdalisRating.{policy.Type}PolicyRater"),
-                    new object[] { engine, engine.Logger });
+                    new object[] { new RatingUpdater(context.Engine) });
             }
             catch
             {
-                return new UnknownPolicyRater(engine, engine.Logger);
+                return new UnknownPolicyRater(new RatingUpdater(context.Engine));
             }
 
         }
