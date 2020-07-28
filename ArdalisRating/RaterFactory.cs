@@ -22,6 +22,19 @@
                     // currently this can't be reached
                     return new UnknownPolicyRater(engine, engine.Logger);
             }
+
+
+            //try
+            //{
+            //  \\**USing Reflection to instantiate***\\
+            //    return (Rater)Activator.CreateInstance(Type.GetType($"ArdalisRating.{policy.Type}PolicyRater"),
+            //        new object[] { engine, engine.Logger });
+            //}
+            //catch
+            //{
+            //    return null;
+            //}
+
         }
     }
 }
